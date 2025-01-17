@@ -1,27 +1,57 @@
 <nav class="navbar">
-  <!-- Bouton Hamburger -->
-  <button
-    type="button"
-    class="navbar__toggle"
-    *ngIf="!isMenuOpen"
-    (click)="toggleMenu()"
-    aria-label="Toggle navigation"
-  >
-    <img
-      src="assets/images/icon-menu.svg"
-      alt="Menu icon"
-      class="navbar__icon"
-    />
-  </button>
+  <!-- Superposition (overlay) qui assombrit l'arrière-plan -->
+  <div
+    class="navbar__overlay"
+    [ngClass]="{ active: isMenuOpen }"
+    (click)="closeMenu()"
+  ></div>
 
-  <!-- Menu -->
-  <div class="navbar__menu" [ngClass]="{ active: isMenuOpen }">
-    <!-- Bouton de fermeture -->
+  <!-- Conteneur du menu Hamburger et Logo -->
+  <div class="navbar__left">
+    <!-- Menu Hamburger -->
     <button
       type="button"
-      class="navbar__toggle navbar__close"
-      (click)="toggleMenu()"
-      aria-label="Close menu"
+      class="navbar__toggle"
+      [ngClass]="{ hidden: isMenuOpen }"
+      (click)="openMenu($event)"
+      aria-label="Toggle navigation"
+    >
+      <img
+        src="assets/images/icon-menu.svg"
+        alt="Menu icon"
+        class="navbar__icon"
+      />
+    </button>
+
+    <div class="navbar__brand">
+      <img
+        src="assets/images/logo.svg"
+        alt="Logo Sneakers"
+        class="navbar__logo"
+      />
+    </div>
+  </div>
+
+  <div class="navbar__icons">
+    <img
+      src="assets/images/icon-cart.svg"
+      alt="Cart icon"
+      class="navbar__icon"
+    />
+    <img
+      src="assets/images/image-avatar.png"
+      alt="User icon"
+      class="navbar__icon"
+    />
+  </div>
+
+  <!-- Menu déroulant -->
+  <div class="navbar__menu" [ngClass]="{ active: isMenuOpen }">
+    <button
+      type="button"
+      class="navbar__close"
+      (click)="closeMenu()"
+      aria-label="Close navigation"
     >
       <img
         src="assets/images/icon-close.svg"
@@ -29,7 +59,6 @@
         class="navbar__icon"
       />
     </button>
-
     <ul>
       <li><a href="#">Collections</a></li>
       <li><a href="#">Men</a></li>

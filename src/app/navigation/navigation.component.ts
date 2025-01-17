@@ -13,8 +13,12 @@ import { CommonModule } from '@angular/common';
 export class NavigationComponent {
   isMenuOpen = false;
 
-  toggleMenu() {
-    console.log('Menu toggled'); // Ajoute cette ligne pour le débogage
-    this.isMenuOpen = !this.isMenuOpen;
+  openMenu(event: Event): void {
+    event.stopPropagation(); // Empêche la propagation de l'événement de clic
+    this.isMenuOpen = true;  // Ouvre le menu
+  }
+
+  closeMenu(): void {
+    this.isMenuOpen = false;  // Ferme le menu
   }
 }
