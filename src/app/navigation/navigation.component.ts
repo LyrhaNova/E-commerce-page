@@ -14,11 +14,11 @@ export class NavigationComponent {
   isMenuOpen = false;
 
   openMenu(event: Event): void {
-    event.stopPropagation(); // Empêche la propagation de l'événement de clic
-    this.isMenuOpen = true;  // Ouvre le menu
+    event.stopPropagation();
+    this.isMenuOpen = true;
   }
 
   closeMenu(): void {
-    this.isMenuOpen = false;  // Ferme le menu
+    this.isMenuOpen = false;
   }
 }

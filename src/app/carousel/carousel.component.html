@@ -1,0 +1,22 @@
+<section class="carousel">
+  <div class="carousel__images">
+    <div *ngFor="let image of images" class="carousel__image">
+      <img [src]="image.src" [alt]="image.alt" />
+    </div>
+  </div>
+
+  <button
+    class="carousel__arrow left"
+    (click)="prevSlide()"
+    aria-label="Previous slide"
+  >
+    <img src="assets/images/icon-previous.svg" alt="Previous slide" />
+  </button>
+  <button
+    class="carousel__arrow right"
+    (click)="nextSlide()"
+    aria-label="Next slide"
+  >
+    <img src="assets/images/icon-next.svg" alt="Next slide" />
+  </button>
+</section>

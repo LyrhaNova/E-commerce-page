@@ -1,12 +1,11 @@
 <nav class="navbar">
-  <!-- Superposition (overlay) qui assombrit l'arrière-plan -->
+  <!-- Overlay pour l'assombrissement -->
   <div
     class="navbar__overlay"
     [ngClass]="{ active: isMenuOpen }"
     (click)="closeMenu()"
   ></div>
 
-  <!-- Conteneur du menu Hamburger et Logo -->
   <div class="navbar__left">
     <!-- Menu Hamburger -->
     <button
