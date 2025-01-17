@@ -1,10 +1,43 @@
+/* Importation des polices */
+@import url('https://fonts.googleapis.com/css2?family=Kumbh+Sans:wght@400;700&display=swap');
+
+/* Variables globales */
+:root {
+  /* Primary Colors */
+  --color-orange: hsl(26, 100%, 55%);
+  --color-pale-orange: hsl(25, 100%, 94%);
+
+  /* Neutral Colors */
+  --color-very-dark-blue: hsl(220, 13%, 13%);
+  --color-dark-grayish-blue: hsl(219, 9%, 45%);
+  --color-grayish-blue: hsl(220, 14%, 75%);
+  --color-light-grayish-blue: hsl(223, 64%, 98%);
+  --color-white: hsl(0, 0%, 100%);
+  --color-black-opacity: rgba(0, 0, 0, 0.75);
+
+  /* Typography */
+  --font-family: 'Kumbh Sans', Arial, sans-serif;
+  --font-size-body: 16px;
+}
+
+/* Global Styles */
 body {
-   margin: 0;
-   font-family: Arial, sans-serif;
-   background-color: pink;
- }
- 
- .navbar__menu ul {
-   padding: 0;
- }
- 
+  margin: 0;
+  font-family: var(--font-family);
+  font-size: var(--font-size-body);
+  // background-color: var(--color-light-grayish-blue);
+  background-color: pink;
+  color: var(--color-dark-grayish-blue);
+}
+
+/* Liens sans soulignement par défaut */
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Utilitaire pour les titres */
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+  font-weight: 700;
+}

@@ -5,18 +5,13 @@
     background: none;
     border: none;
     cursor: pointer;
-    width: 40px;
-    height: 40px;
+    width: 65px;
+    height: 60px;
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 0;
-    position: relative; /* Par défaut */
-
-    img {
-      width: 24px;
-      height: auto;
-    }
+    position: relative;
   }
 
   &__menu {
@@ -26,7 +21,6 @@
     width: 250px;
     height: 100%;
     background-color: #fff;
-    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
     transition: left 0.3s ease-in-out;
 
     &.active {
@@ -35,16 +29,17 @@
 
     ul {
       list-style: none;
-      padding: 20px;
+      padding: 20px 25px;
       margin: 0;
 
       li {
-        margin-bottom: 15px;
+        margin-bottom: 20px;
 
         a {
           text-decoration: none;
           color: #333;
           font-size: 18px;
+          font-weight: 700;
 
           &:hover {
             color: #007BFF;
