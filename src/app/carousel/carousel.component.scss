@@ -45,20 +45,38 @@
 
     padding: 5px;
 
+    transition: transform 0.3s ease;
+
     img {
       width: 30%;
       height: 100%;
       object-fit: contain;
     }
+    &.active {
+      animation: bump 0.4s ease-out;
+    }
+    &.left {
+      padding-left: 2px;
+      left: 15px;
+    }
+  
+    &.right {
+      padding-right: 2px;
+      right: 15px;
+    }
+
+      /* Animation bump */
+  @keyframes bump {
+    0% {
+      transform: translateY(-50%) scale(1);
+    }
+    50% {
+      transform: translateY(-50%) scale(1.2);
+    }
+    100% {
+      transform: translateY(-50%) scale(1);
+    }
+  }
   }
 
-  .carousel__arrow.left {
-    padding-left: 2px;
-    left: 15px;
-  }
-
-  .carousel__arrow.right {
-    padding-right: 2px;
-    right: 15px;
-  }
 }

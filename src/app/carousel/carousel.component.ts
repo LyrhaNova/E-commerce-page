@@ -18,18 +18,37 @@ export class CarouselComponent {
   currentIndex: number = 0;
 
   nextSlide() {
-    this.currentIndex = (this.currentIndex + 1) % this.images.length;
+    this.setActiveArrow('right');
+    if (this.currentIndex < this.images.length - 1) {
+      this.currentIndex++;
+    } else {
+      this.currentIndex = 0;
+    }
     this.updateTransform();
   }
 
   prevSlide() {
-    this.currentIndex = (this.currentIndex - 1 + this.images.length) % this.images.length;
+    this.setActiveArrow('left');
+    if (this.currentIndex > 0) {
+      this.currentIndex--;
+    } else {
+      this.currentIndex = this.images.length - 1;
+    }
     this.updateTransform();
+  }
+
+  setActiveArrow(direction: string) {
+    const arrow = document.querySelector(`.carousel__arrow.${direction}`);
+    if (arrow) {
+      arrow.classList.remove('active');
+      setTimeout(() => {
+        arrow.classList.add('active');
+      }, 0);
+    }
   }
 
   updateTransform() {
     const carouselImages = document.querySelector('.carousel__images') as HTMLElement;
-    carouselImages.style.transition = 'transform 0.5s ease-in-out';
     carouselImages.style.transform = `translateX(-${this.currentIndex * 100}%)`;
   }
 }
