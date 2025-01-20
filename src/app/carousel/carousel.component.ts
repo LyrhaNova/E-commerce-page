@@ -14,7 +14,7 @@ export class CarouselComponent {
     { src: 'assets/images/image-product-2.jpg', alt: 'Image de la chaussure 2' },
     { src: 'assets/images/image-product-3.jpg', alt: 'Image de la chaussure 3' },
     { src: 'assets/images/image-product-4.jpg', alt: 'Image de la chaussure 4' }
-  ];
+  ]
   currentIndex: number = 0;
 
   nextSlide() {
