@@ -32,16 +32,35 @@
   </div>
 
   <div class="navbar__icons">
-    <img
-      src="assets/images/icon-cart.svg"
-      alt="Cart icon"
-      class="navbar__icon"
-    />
+    <!-- Bouton pour ouvrir/fermer le panier -->
+    <button
+      class="navbar__cart-button"
+      [class.open]="isCartOpen"
+      aria-label="Toggle cart"
+      (click)="toggleCart($event)"
+    >
+      <img
+        src="assets/images/icon-cart.svg"
+        alt="Cart icon"
+        class="navbar__cart"
+      />
+    </button>
+
+    <!-- Avatar utilisateur -->
     <img
       src="assets/images/image-avatar.png"
-      alt="User icon"
+      alt="User profile icon"
       class="navbar__icon"
     />
+  </div>
+
+  <!-- Contenu du panier -->
+  <div class="navbar__cart-content" [ngClass]="{ open: isCartOpen }">
+    <h4>Cart</h4>
+    <div class="navbar__cart-content__line"></div>
+    <div class="navbar__cart-content__content">
+      <p>Your cart is empty.</p>
+    </div>
   </div>
 
   <!-- Menu déroulant -->
