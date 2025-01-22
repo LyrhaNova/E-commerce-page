@@ -44,6 +44,9 @@
         alt="Cart icon"
         class="navbar__cart"
       />
+      <span *ngIf="cartQuantity > 0" class="navbar__cart-badge">{{
+        cartQuantity
+      }}</span>
     </button>
 
     <!-- Avatar utilisateur -->
@@ -52,37 +55,36 @@
       alt="User profile icon"
       class="navbar__icon"
     />
-  </div>
 
-  <!-- Contenu du panier -->
-  <div class="navbar__cart-content" [ngClass]="{ open: isCartOpen }">
-    <h4>Cart</h4>
-    <div class="navbar__cart-content__line"></div>
-    <div class="navbar__cart-content__content">
-      <p>Your cart is empty.</p>
+    <!-- Menu déroulant -->
+    <div class="navbar__menu" [ngClass]="{ active: isMenuOpen }">
+      <button
+        type="button"
+        class="navbar__close"
+        (click)="closeMenu()"
+        aria-label="Close navigation"
+      >
+        <img src="assets/images/icon-close.svg" alt="Close icon" />
+      </button>
+      <ul>
+        <li><a href="#">Collections</a></li>
+        <li><a href="#">Men</a></li>
+        <li><a href="#">Women</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
     </div>
   </div>
 
-  <!-- Menu déroulant -->
-  <div class="navbar__menu" [ngClass]="{ active: isMenuOpen }">
-    <button
-      type="button"
-      class="navbar__close"
-      (click)="closeMenu()"
-      aria-label="Close navigation"
-    >
-      <img
-        src="assets/images/icon-close.svg"
-        alt="Close icon"
-        class="navbar__icon"
-      />
-    </button>
-    <ul>
-      <li><a href="#">Collections</a></li>
-      <li><a href="#">Men</a></li>
-      <li><a href="#">Women</a></li>
-      <li><a href="#">About</a></li>
-      <li><a href="#">Contact</a></li>
-    </ul>
+  <!-- Contenu du panier -->
+  <div class="navbar__cart-content" [class.open]="isCartOpen">
+    <h4>Cart</h4>
+    <div class="navbar__cart-content__line"></div>
+    <div class="navbar__cart-content__content">
+      <p *ngIf="cartQuantity === 0">Your cart is empty.</p>
+      <p *ngIf="cartQuantity > 0">
+        You have {{ cartQuantity }} item(s) in your cart.
+      </p>
+    </div>
   </div>
 </nav>

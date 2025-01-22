@@ -4,17 +4,19 @@
       src="assets/images/icon-minus.svg"
       alt="Cart icon"
       class="purchase__counter__minus"
+      (click)="decreaseQuantity()"
     />
-    <p>compteur</p>
+    <p>{{ quantity }}</p>
     <img
       src="assets/images/icon-plus.svg"
       alt="Cart icon"
       class="purchase__counter__plus"
+      (click)="increaseQuantity()"
     />
   </div>
 
   <div class="purchase__add">
-    <button>
+    <button (click)="addToCart()">
       <img
         src="assets/images/icon-cart.svg"
         alt="Cart icon"

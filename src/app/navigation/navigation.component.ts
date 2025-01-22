@@ -1,5 +1,6 @@
-import { Component, HostListener } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { CartService } from '../services/cart.services';
 
 @Component({
   selector: 'app-navigation',
@@ -10,9 +11,19 @@ import { CommonModule } from '@angular/common';
   templateUrl: './navigation.component.html',
   styleUrls: ['./navigation.component.scss']
 })
-export class NavigationComponent {
+export class NavigationComponent implements OnInit {
   isMenuOpen = false;
   isCartOpen = false;
+  cartQuantity: number = 0;
+
+  constructor(private cartService: CartService) {}
+
+  ngOnInit(): void {
+    // Observer la quantité d'articles dans le panier
+    this.cartService.cartQuantity$.subscribe((quantity) => {
+      this.cartQuantity = quantity;
+    });
+  }
 
   openMenu(event: Event): void {
     event.stopPropagation();
@@ -24,10 +35,10 @@ export class NavigationComponent {
   }
 
   toggleCart(event: Event): void {
-    event.stopPropagation(); // Empêche la propagation du clic pour que le HostListener ne ferme pas le panier
+    event.stopPropagation();
     this.isCartOpen = !this.isCartOpen;
-    console.log('Panier ouvert:', this.isCartOpen); // Vérifiez l'état du panier
-  }
+    console.log('Panier ouvert:', this.isCartOpen);
+  }  
 
   // Fermer le panier lorsqu'on clique en dehors
   @HostListener('document:click', ['$event'])
@@ -39,7 +50,7 @@ export class NavigationComponent {
     // Si on clique en dehors du panier ET du bouton
     if (cartElement && cartButton && !cartElement.contains(target) && !cartButton.contains(target)) {
       this.isCartOpen = false;
-      console.log('Panier fermé'); // Vérifiez la fermeture
+      console.log('Panier fermé');
     }
   }
 }

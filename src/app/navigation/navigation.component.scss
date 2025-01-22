@@ -59,6 +59,8 @@
     padding: 25px 0px 0px 30px;
     align-self: flex-start;
     z-index: 65;
+    width: 10px;
+    height: auto;
   }
 
   &__toggle {
@@ -114,26 +116,30 @@
     width: 96%;
     max-width: 400px;
     height: 240px;
-
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    
     background-color: white;
     border-radius: 10px;
     box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
     z-index: 40;
-
-    opacity: 0; /* Par défaut, caché */
-    visibility: hidden; /* Empêche l'interaction lorsque fermé */
-    transform: translate(-50%, -10px); /* Position légèrement au-dessus */
+    
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(-50%) translateY(-10px);
     transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
+  
     &.open {
       opacity: 1;
       visibility: visible;
-      transform: translate(-50%, 0); /* Position initiale */
+      transform: translateX(-50%) translateY(0);
     }
 
     h4 {
       color: var(--color-very-dark-blue);
       font-size: 15px;
-      padding: 16px 22px 28px;
+      padding: 18px 22px 28px;
     }
 
     &__line {
@@ -150,6 +156,7 @@
 
       p {
         font-weight: 700;
+        font-size: 15px;
       }
     }
   }

@@ -3,7 +3,7 @@
    align-items: center;
    justify-content: center;
    flex-direction: column;
-   margin-top: 15px;
+   margin: 15px 0 50px 0;
 
    &__counter {
       display: flex;
@@ -13,6 +13,8 @@
       border-radius: 10px;
       width: 88%;
       &__minus, &__plus {
+         display: flex;
+         align-items: center;
          width: auto;
          height: auto;
       }
@@ -21,6 +23,15 @@
       }
       &__plus {
          margin-right: 20px;
+      }
+      button {
+         background: none;
+         border: none;
+         cursor: pointer;
+      }
+      p {
+         font-weight: 700;
+         color: var( --color-very-dark-blue);
       }
    }
 
