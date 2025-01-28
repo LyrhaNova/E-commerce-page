@@ -10,62 +10,68 @@ export interface CartItem {
 }
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class CartService {
+  // Subject pour la liste des articles du panier
   private cartItemsSubject = new BehaviorSubject<CartItem[]>([]);
   cartItems$ = this.cartItemsSubject.asObservable();
 
+  // Subject pour la quantité totale
+  private cartQuantitySubject = new BehaviorSubject<number>(0);
+  cartQuantity$ = this.cartQuantitySubject.asObservable();
+
   constructor() {}
 
-  // Ajoute un article au panier
+  /**
+   * Ajoute un article au panier
+   * @param item L'article à ajouter
+   */
   addToCart(item: CartItem): void {
     const existingItemIndex = this.cartItemsSubject.value.findIndex(
       (cartItem) => cartItem.id === item.id
     );
-  
+
     if (existingItemIndex > -1) {
-      // Met à jour la quantité si l'article existe déjà
       this.cartItemsSubject.value[existingItemIndex].quantity += item.quantity;
     } else {
-      // Ajoute un nouvel article
       this.cartItemsSubject.next([...this.cartItemsSubject.value, item]);
     }
+    this.updateCartQuantity();
   }
-  
 
-  // Supprime un article du panier
+  /**
+   * Supprime un article du panier
+   * @param itemId L'ID de l'article à supprimer
+   */
   removeFromCart(itemId: number): void {
-    const currentItems = this.cartItemsSubject.value.filter(item => item.id !== itemId);
+    const currentItems = this.cartItemsSubject.value.filter(
+      (item) => item.id !== itemId
+    );
     this.cartItemsSubject.next([...currentItems]);
+
+    // Met à jour la quantité totale
+    this.updateCartQuantity();
   }
 
-  // Retourne le total des articles
-  getTotalQuantity(): number {
-    return this.cartItemsSubject.value.reduce((total, item) => total + item.quantity, 0);
-  }
-
-  // Retourne le prix total
+  /**
+   * Retourne le prix total du panier
+   */
   getTotalPrice(): number {
-    return this.cartItemsSubject.value.reduce((total, item) => total + item.price * item.quantity, 0);
+    return this.cartItemsSubject.value.reduce(
+      (total, item) => total + item.price * item.quantity,
+      0
+    );
+  }
+
+  /**
+   * Méthode privée pour recalculer la quantité totale des articles
+   */
+  private updateCartQuantity(): void {
+    const totalQuantity = this.cartItemsSubject.value.reduce(
+      (sum, item) => sum + item.quantity,
+      0
+    );
+    this.cartQuantitySubject.next(totalQuantity);
   }
 }
-
-// import { Injectable } from '@angular/core';
-// import { BehaviorSubject } from 'rxjs';
-
-// @Injectable({
-//   providedIn: 'root'
-// })
-// export class CartService {
-//   private cartQuantitySubject = new BehaviorSubject<number>(0);
-//   cartQuantity$ = this.cartQuantitySubject.asObservable();
-
-//   constructor() {}
-
-//   // Ajoute une quantité au panier
-//   addToCart(quantity: number): void {
-//     const currentQuantity = this.cartQuantitySubject.value;
-//     this.cartQuantitySubject.next(currentQuantity + quantity);
-//   }
-// }
