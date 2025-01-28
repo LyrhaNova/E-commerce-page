@@ -42,9 +42,10 @@
       <img
         src="assets/images/icon-cart.svg"
         alt="Cart icon"
-        class="navbar__cart"
+        class="navbar__cart-button__icon"
+        [class.open]="isCartOpen"
       />
-      <span *ngIf="cartQuantity > 0" class="navbar__cart-badge">{{
+      <span *ngIf="cartQuantity > 0" class="navbar__cart-button__badge">{{
         cartQuantity
       }}</span>
     </button>
@@ -53,7 +54,7 @@
     <img
       src="assets/images/image-avatar.png"
       alt="User profile icon"
-      class="navbar__icon"
+      class="navbar__icons__profil"
     />
 
     <!-- Menu déroulant -->
@@ -75,16 +76,43 @@
       </ul>
     </div>
   </div>
-
-  <!-- Contenu du panier -->
   <div class="navbar__cart-content" [class.open]="isCartOpen">
     <h4>Cart</h4>
     <div class="navbar__cart-content__line"></div>
-    <div class="navbar__cart-content__content">
-      <p *ngIf="cartQuantity === 0">Your cart is empty.</p>
-      <p *ngIf="cartQuantity > 0">
-        You have {{ cartQuantity }} item(s) in your cart.
-      </p>
+
+    <!-- Si le panier est vide -->
+    <div
+      class="navbar__cart-content__empty-text"
+      *ngIf="cartItems.length === 0"
+    >
+      <p>Your cart is empty.</p>
+    </div>
+
+    <!-- Si le panier contient des articles -->
+    <div *ngIf="cartItems.length > 0">
+      <div *ngFor="let item of cartItems" class="cart-item">
+        <img
+          [src]="item.imageUrl"
+          alt="{{ item.name }}"
+          class="cart-item__image"
+        />
+
+        <div class="cart-item__details">
+          <p class="cart-item__details__name">{{ item.name }}</p>
+          <p class="cart-item__details__price">
+            {{ item.price | currency }} x {{ item.quantity }}
+            <span class="cart-item__details__total">{{
+              item.price * item.quantity | currency
+            }}</span>
+          </p>
+        </div>
+        <button (click)="removeItem(item.id)" class="cart-item__remove">
+          <img src="assets/images/icon-delete.svg" alt="Delete icon" />
+        </button>
+      </div>
+      <div class="navbar__cart-content__checkout">
+        <button class="navbar__cart-content__checkout__btn">Checkout</button>
+      </div>
     </div>
   </div>
 </nav>
