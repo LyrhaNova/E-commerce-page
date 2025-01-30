@@ -1,22 +1,43 @@
 <section class="carousel">
-  <div class="carousel__images">
-    <div *ngFor="let image of images" class="carousel__image">
-      <img [src]="image.src" [alt]="image.alt" />
+  <!-- Version MOBILE -->
+  <div class="carousel__slider">
+    <div class="carousel__images">
+      <div *ngFor="let image of images" class="carousel__image">
+        <img [src]="image.src" [alt]="image.alt" />
+      </div>
     </div>
+
+    <button
+      class="carousel__arrow left"
+      (click)="prevSlide()"
+      aria-label="Previous slide"
+    >
+      <img src="assets/images/icon-previous.svg" alt="Previous slide" />
+    </button>
+    <button
+      class="carousel__arrow right"
+      (click)="nextSlide()"
+      aria-label="Next slide"
+    >
+      <img src="assets/images/icon-next.svg" alt="Next slide" />
+    </button>
   </div>
 
-  <button
-    class="carousel__arrow left"
-    (click)="prevSlide()"
-    aria-label="Previous slide"
-  >
-    <img src="assets/images/icon-previous.svg" alt="Previous slide" />
-  </button>
-  <button
-    class="carousel__arrow right"
-    (click)="nextSlide()"
-    aria-label="Next slide"
-  >
-    <img src="assets/images/icon-next.svg" alt="Next slide" />
-  </button>
+  <!-- Version DESKTOPs -->
+  <div class="carousel__desktop">
+    <div class="carousel__desktop__main-image">
+      <img [src]="images[currentIndex].src" [alt]="images[currentIndex].alt" />
+    </div>
+
+    <div class="carousel__desktop__thumbnails">
+      <div
+        *ngFor="let image of images; let i = index"
+        class="carousel__desktop__thumbnails__thumbnail"
+        [class.active]="i === currentIndex"
+        (click)="setCurrentImage(i)"
+      >
+        <img [src]="image.src" [alt]="image.alt" />
+      </div>
+    </div>
+  </div>
 </section>
